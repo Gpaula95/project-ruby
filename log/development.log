@@ -1,0 +1,1014 @@
+  [1m[35m (76.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:4
+  [1m[35m (12.4ms)[0m  [1m[35mCREATE DATABASE `control-api_development` DEFAULT CHARACTER SET `utf8`[0m
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE DATABASE `control-api_test` DEFAULT CHARACTER SET `utf8`[0m
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:4
+  [1m[35m (348.1ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:4
+  [1m[35m (284.7ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ bin/rails:4
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT GET_LOCK('1821087687418734210', 0)[0m
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:4
+Migrating to CreatePayments (20190519174327)
+  [1m[35m (305.1ms)[0m  [1m[35mCREATE TABLE `payments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519174327_create_payments.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::SchemaMigration Create (47.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174327')[0m
+  ↳ bin/rails:4
+  [1m[35m (54.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+Migrating to CreateClients (20190519174349)
+  [1m[35m (332.5ms)[0m  [1m[35mCREATE TABLE `clients` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `cpf` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519174349_create_clients.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174349')[0m
+  ↳ bin/rails:4
+  [1m[35m (83.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+Migrating to CreateProducts (20190519174429)
+  [1m[35m (411.3ms)[0m  [1m[35mCREATE TABLE `products` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `price` float(24), `quantidity` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519174429_create_products.rb:3
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174429')[0m
+  ↳ bin/rails:4
+  [1m[35m (43.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+Migrating to CreateSales (20190519174521)
+  [1m[35m (446.1ms)[0m  [1m[35mCREATE TABLE `sales` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `client_id` bigint, `payment_id` bigint, `total_price` float(24), `date` datetime, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_sales_on_client_id`  (`client_id`),  INDEX `index_sales_on_payment_id`  (`payment_id`), CONSTRAINT `fk_rails_3fb137af04`
+FOREIGN KEY (`client_id`)
+  REFERENCES `clients` (`id`)
+, CONSTRAINT `fk_rails_cb0f4761c1`
+FOREIGN KEY (`payment_id`)
+  REFERENCES `payments` (`id`)
+)[0m
+  ↳ db/migrate/20190519174521_create_sales.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174521')[0m
+  ↳ bin/rails:4
+  [1m[35m (38.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+Migrating to CreateProductSales (20190519174632)
+  [1m[35m (386.2ms)[0m  [1m[35mCREATE TABLE `product_sales` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `product_id` bigint, `sale_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_product_sales_on_product_id`  (`product_id`),  INDEX `index_product_sales_on_sale_id`  (`sale_id`), CONSTRAINT `fk_rails_da3be5f026`
+FOREIGN KEY (`product_id`)
+  REFERENCES `products` (`id`)
+, CONSTRAINT `fk_rails_06f643df4a`
+FOREIGN KEY (`sale_id`)
+  REFERENCES `sales` (`id`)
+)[0m
+  ↳ db/migrate/20190519174632_create_product_sales.rb:3
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174632')[0m
+  ↳ bin/rails:4
+  [1m[35m (37.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:4
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2019-05-19 17:58:57', '2019-05-19 17:58:57')[0m
+  ↳ bin/rails:4
+  [1m[35m (41.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:4
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT RELEASE_LOCK('1821087687418734210')[0m
+  ↳ bin/rails:4
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ bin/rails:4
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ bin/rails:4
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:6
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO `products` (`name`, `price`, `quantidity`, `created_at`, `updated_at`) VALUES ('Açai 500ml', 8.5, 50, '2019-05-19 18:07:52', '2019-05-19 18:07:52')[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (61.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:6
+  [1m[36mProduct Create (0.3ms)[0m  [1m[32mINSERT INTO `products` (`name`, `price`, `quantidity`, `created_at`, `updated_at`) VALUES ('Agua Mineral', 2.5, 20, '2019-05-19 18:07:52', '2019-05-19 18:07:52')[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (85.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mClient Create (0.2ms)[0m  [1m[32mINSERT INTO `clients` (`name`, `cpf`, `created_at`, `updated_at`) VALUES ('Paulinho', '111.222.333.444-5', '2019-05-19 18:07:52', '2019-05-19 18:07:52')[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (36.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mPayment Create (0.2ms)[0m  [1m[32mINSERT INTO `payments` (`name`, `created_at`, `updated_at`) VALUES ('Débito', '2019-05-19 18:07:52', '2019-05-19 18:07:52')[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (38.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mPayment Create (0.4ms)[0m  [1m[32mINSERT INTO `payments` (`name`, `created_at`, `updated_at`) VALUES ('Crédito', '2019-05-19 18:07:52', '2019-05-19 18:07:52')[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (85.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+Started GET "/products" for ::1 at 2019-05-19 15:29:20 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.3) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.3) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2019-05-19 15:29:20 -0300
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.3) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.3) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.9ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('1821087687418734210', 0)[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreateUserAdmins (20190519182736)
+  [1m[35m (297.5ms)[0m  [1m[35mCREATE TABLE `user_admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user` varchar(255), `password` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519182736_create_user_admins.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519182736')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (78.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('1821087687418734210')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Started GET "/products" for ::1 at 2019-05-19 15:29:59 -0300
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/products_controller.rb:8
+Completed 200 OK in 29ms (Views: 16.0ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2019-05-19 15:29:59 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/clients" for ::1 at 2019-05-19 15:30:08 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/clients"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/clients" for ::1 at 2019-05-19 15:31:05 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/clients"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/clients" for ::1 at 2019-05-19 15:31:16 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+ActionController::RoutingError (No route matches [GET] "/clients"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/clients" for ::1 at 2019-05-19 15:31:57 -0300
+  [1m[35m (0.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for ClientsController):
+  
+actionpack (5.2.3) lib/abstract_controller/base.rb:129:in `process'
+actionpack (5.2.3) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.3) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/clients" for ::1 at 2019-05-19 15:33:29 -0300
+Processing by ClientsController#index as HTML
+  [1m[36mClient Load (0.3ms)[0m  [1m[34mSELECT `clients`.* FROM `clients`[0m
+  ↳ app/controllers/clients_controller.rb:8
+Completed 200 OK in 17ms (Views: 12.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/payments" for ::1 at 2019-05-19 15:34:22 -0300
+Processing by PaymentsController#index as HTML
+  [1m[36mPayment Load (0.3ms)[0m  [1m[34mSELECT `payments`.* FROM `payments`[0m
+  ↳ app/controllers/payments_controller.rb:8
+Completed 200 OK in 13ms (Views: 9.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/products" for ::1 at 2019-05-19 15:46:57 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by ProductsController#index as */*
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/products_controller.rb:8
+Completed 200 OK in 18ms (Views: 14.4ms | ActiveRecord: 1.7ms)
+
+
+Started POST "/products" for ::1 at 2019-05-19 15:47:32 -0300
+Processing by ProductsController#create as */*
+  Parameters: {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50, "product"=>{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}}
+Completed 500 Internal Server Error in 100ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `product' for #<ProductsController:0x00007fa9d0100438>
+Did you mean?  product_url):
+  
+app/controllers/products_controller.rb:17:in `create'
+Started POST "/products" for ::1 at 2019-05-19 15:48:12 -0300
+Processing by ProductsController#create as */*
+  Parameters: {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50, "product"=>{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}}
+Unpermitted parameters: :id, :quantidity
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/products_controller.rb:19
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO `products` (`name`, `price`, `created_at`, `updated_at`) VALUES ('Açai 300ml', 8.5, '2019-05-19 18:48:12', '2019-05-19 18:48:12')[0m
+  ↳ app/controllers/products_controller.rb:19
+  [1m[35m (52.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/products_controller.rb:19
+Completed 201 Created in 74ms (Views: 2.6ms | ActiveRecord: 54.0ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:00:06 -0300
+  [1m[35m (0.4ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/glayton/control-api/app/controllers/sales_controller.rb:21: syntax error, unexpected keyword_do_block, expecting keyword_end
+    params[:products] do product
+                        ^
+/home/glayton/control-api/app/controllers/sales_controller.rb:22: syntax error, unexpected '}', expecting =>
+/home/glayton/control-api/app/controllers/sales_controller.rb:58: syntax error, unexpected keyword_end, expecting end-of-input):
+  
+app/controllers/sales_controller.rb:21: syntax error, unexpected keyword_do_block, expecting keyword_end
+app/controllers/sales_controller.rb:22: syntax error, unexpected '}', expecting =>
+app/controllers/sales_controller.rb:58: syntax error, unexpected keyword_end, expecting end-of-input
+Started POST "/sales" for ::1 at 2019-05-19 16:00:51 -0300
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>20.5, "payment_id"=>1, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>20.5, "payment_id"=>1}}
+Unpermitted parameters: :client_id, :payment_id
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+Started POST "/sales" for ::1 at 2019-05-19 16:01:35 -0300
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (1.5ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Unpermitted parameters: :client_id, :payment_id, :total_price
+  [1m[35m (34.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/sales_controller.rb:22
+  ↳ app/controllers/sales_controller.rb:22
+Completed 422 Unprocessable Entity in 45845ms (Views: 0.4ms | ActiveRecord: 1.7ms)
+
+
+  [1m[35m (1.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 422 Unprocessable Entity in 1467ms (Views: 0.2ms | ActiveRecord: 35.7ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:02:28 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client"=>1, "payment"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"total_price"=>20.5}}
+Unpermitted parameter: :total_price
+  [1m[35m (1.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 422 Unprocessable Entity in 269784ms (Views: 0.8ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:07:17 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  
+SyntaxError (/home/glayton/control-api/app/controllers/sales_controller.rb:20: syntax error, unexpected keyword_do_block, expecting keyword_end
+    params[:products] do product
+                        ^
+/home/glayton/control-api/app/controllers/sales_controller.rb:57: syntax error, unexpected keyword_end, expecting end-of-input):
+  
+app/controllers/sales_controller.rb:20: syntax error, unexpected keyword_do_block, expecting keyword_end
+app/controllers/sales_controller.rb:57: syntax error, unexpected keyword_end, expecting end-of-input
+Started POST "/sales" for ::1 at 2019-05-19 16:11:41 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client"=>1, "payment"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"total_price"=>20.5}}
+Unpermitted parameter: :total_price
+Unpermitted parameter: :total_price
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 422 Unprocessable Entity in 127097ms (Views: 2.1ms | ActiveRecord: 2.0ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:13:54 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client"=>1, "payment"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"total_price"=>20.5}}
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 422 Unprocessable Entity in 74934ms (Views: 0.3ms | ActiveRecord: 2.6ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:15:19 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Unpermitted parameters: :client_id, :payment_id
+Unpermitted parameters: :client_id, :payment_id
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 422 Unprocessable Entity in 25769ms (Views: 0.2ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:15:49 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mClient Load (0.4ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mPayment Load (0.3ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mSale Create (0.2ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:16:08', '2019-05-19 19:16:08')[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (84.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 201 Created in 18493ms (Views: 3.7ms | ActiveRecord: 90.8ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:16:35 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (2.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mClient Load (0.8ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mPayment Load (0.8ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mSale Create (0.9ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:17:26', '2019-05-19 19:17:26')[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (117.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 201 Created in 50855ms (Views: 2.4ms | ActiveRecord: 122.6ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:17:30 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (2.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mClient Load (0.8ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mPayment Load (0.3ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:19:04', '2019-05-19 19:19:04')[0m
+  ↳ app/controllers/sales_controller.rb:22
+  [1m[35m (76.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:22
+Completed 201 Created in 94543ms (Views: 3.0ms | ActiveRecord: 83.9ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:19:08 -0300
+  
+SyntaxError (/home/glayton/control-api/app/controllers/sales_controller.rb:20: syntax error, unexpected keyword_do_block, expecting keyword_end
+    params[:products] do |product|
+                        ^
+/home/glayton/control-api/app/controllers/sales_controller.rb:56: syntax error, unexpected keyword_end, expecting end-of-input):
+  
+app/controllers/sales_controller.rb:20: syntax error, unexpected keyword_do_block, expecting keyword_end
+app/controllers/sales_controller.rb:56: syntax error, unexpected keyword_end, expecting end-of-input
+Started POST "/sales" for ::1 at 2019-05-19 16:19:32 -0300
+  
+SyntaxError (/home/glayton/control-api/app/controllers/sales_controller.rb:20: syntax error, unexpected keyword_do_block, expecting keyword_end
+    params[:products] do product
+                        ^
+/home/glayton/control-api/app/controllers/sales_controller.rb:56: syntax error, unexpected keyword_end, expecting end-of-input):
+  
+app/controllers/sales_controller.rb:20: syntax error, unexpected keyword_do_block, expecting keyword_end
+app/controllers/sales_controller.rb:56: syntax error, unexpected keyword_end, expecting end-of-input
+Started POST "/sales" for ::1 at 2019-05-19 16:21:43 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 139ms (ActiveRecord: 3.0ms)
+
+
+  
+NameError (undefined local variable or method `product' for #<SalesController:0x000055f931ca7ad0>
+Did you mean?  product_url):
+  
+app/controllers/sales_controller.rb:20:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:22:02 -0300
+  [1m[35m (0.6ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 150ms (ActiveRecord: 2.3ms)
+
+
+  
+NameError (undefined local variable or method `product' for #<SalesController:0x00007ff2e0bc1008>
+Did you mean?  product_url):
+  
+app/controllers/sales_controller.rb:20:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:22:35 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:25
+  [1m[36mClient Load (0.5ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:25
+  [1m[36mPayment Load (0.3ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:25
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:24:04', '2019-05-19 19:24:04')[0m
+  ↳ app/controllers/sales_controller.rb:25
+  [1m[35m (90.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:25
+Completed 201 Created in 89224ms (Views: 4.0ms | ActiveRecord: 96.9ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:24:13 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 1.1ms)
+
+
+  
+NoMethodError (undefined method `id' for #<ActionController::Parameters:0x000056151f7f13d8>):
+  
+app/controllers/sales_controller.rb:21:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:25:04 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 123ms (ActiveRecord: 1.3ms)
+
+
+  
+NameError (undefined local variable or method `product_id' for #<SalesController:0x00007ff2e0bc2a98>
+Did you mean?  product
+               product_url):
+  
+app/controllers/sales_controller.rb:21:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:25:37 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 1.5ms)
+
+
+  
+NoMethodError (undefined method `id' for #<ActionController::Parameters:0x000056151f50b128>):
+  
+app/controllers/sales_controller.rb:21:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:25:57 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 2.1ms)
+
+
+  
+NoMethodError (undefined method `id' for #<ActionController::Parameters:0x00007ff2e0d4fc30>):
+  
+app/controllers/sales_controller.rb:21:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:30:04 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 1.6ms)
+
+
+  
+NoMethodError (undefined method `id' for :product:Symbol):
+  
+app/controllers/sales_controller.rb:21:in `block in create'
+app/controllers/sales_controller.rb:20:in `each'
+app/controllers/sales_controller.rb:20:in `create'
+Started POST "/sales" for ::1 at 2019-05-19 16:30:28 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (2.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[36mClient Load (0.4ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[36mPayment Load (0.2ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:31:07', '2019-05-19 19:31:07')[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[35m (60.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:26
+Completed 201 Created in 39100ms (Views: 3.0ms | ActiveRecord: 69.3ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:32:56 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[36mClient Load (0.5ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[36mPayment Load (0.3ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:33:49', '2019-05-19 19:33:49')[0m
+  ↳ app/controllers/sales_controller.rb:26
+  [1m[35m (178.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:26
+Completed 201 Created in 52978ms (Views: 3.4ms | ActiveRecord: 185.9ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:33:53 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mClient Load (0.2ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mPayment Load (0.2ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:33:54', '2019-05-19 19:33:54')[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[35m (64.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:21
+Completed 201 Created in 140978ms (Views: 4.3ms | ActiveRecord: 73.3ms)
+
+
+Started GET "/sales" for ::1 at 2019-05-19 16:37:58 -0300
+Processing by SalesController#index as */*
+  Parameters: {"sale"=>{}}
+  [1m[36mSale Load (0.3ms)[0m  [1m[34mSELECT `sales`.* FROM `sales`[0m
+  ↳ app/controllers/sales_controller.rb:8
+Completed 200 OK in 4ms (Views: 3.3ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:54:04 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mClient Load (0.3ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mPayment Load (1.0ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:54:04', '2019-05-19 19:54:04')[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[35m (83.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:21
+Completed 201 Created in 5799ms (Views: 3.0ms | ActiveRecord: 123.0ms)
+
+
+Started POST "/sales" for ::1 at 2019-05-19 16:57:10 -0300
+Processing by SalesController#create as */*
+  Parameters: {"client_id"=>1, "payment_id"=>1, "total_price"=>20.5, "products"=>[{"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}, {"id"=>1, "name"=>"Açai 300ml", "price"=>8.5, "quantidity"=>50}], "sale"=>{"client_id"=>1, "payment_id"=>1, "total_price"=>20.5}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mClient Load (0.3ms)[0m  [1m[34mSELECT  `clients`.* FROM `clients` WHERE `clients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mPayment Load (0.2ms)[0m  [1m[34mSELECT  `payments`.* FROM `payments` WHERE `payments`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[36mSale Create (0.3ms)[0m  [1m[32mINSERT INTO `sales` (`client_id`, `payment_id`, `total_price`, `created_at`, `updated_at`) VALUES (1, 1, 20.5, '2019-05-19 19:57:10', '2019-05-19 19:57:10')[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[35m (70.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/sales_controller.rb:21
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ (byebug):1
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT  `products`.* FROM `products` WHERE `products`.`id` = 1 LIMIT 1[0m
+  ↳ (byebug):1
+  [1m[36mSale Load (0.3ms)[0m  [1m[34mSELECT  `sales`.* FROM `sales` WHERE `sales`.`id` = 9 LIMIT 1[0m
+  ↳ (byebug):1
+  [1m[36mProductSale Create (0.2ms)[0m  [1m[32mINSERT INTO `product_sales` (`product_id`, `sale_id`, `created_at`, `updated_at`) VALUES (1, 9, '2019-05-19 19:57:41', '2019-05-19 19:57:41')[0m
+  ↳ (byebug):1
+  [1m[35m (39.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ (byebug):1
+Completed 201 Created in 69934ms (Views: 3.1ms | ActiveRecord: 123.0ms)
+
+
+Started GET "/sales" for ::1 at 2019-05-19 16:58:36 -0300
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by SalesController#index as */*
+  Parameters: {"sale"=>{}}
+  [1m[36mSale Load (0.3ms)[0m  [1m[34mSELECT `sales`.* FROM `sales`[0m
+  ↳ app/controllers/sales_controller.rb:8
+Completed 200 OK in 14ms (Views: 12.6ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/sales/1" for ::1 at 2019-05-19 16:59:27 -0300
+Processing by SalesController#show as */*
+  Parameters: {"id"=>"1", "sale"=>{}}
+  [1m[36mSale Load (0.4ms)[0m  [1m[34mSELECT  `sales`.* FROM `sales` WHERE `sales`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:51
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/sales/9" for ::1 at 2019-05-19 16:59:33 -0300
+Processing by SalesController#show as */*
+  Parameters: {"id"=>"9", "sale"=>{}}
+  [1m[36mSale Load (0.4ms)[0m  [1m[34mSELECT  `sales`.* FROM `sales` WHERE `sales`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/sales_controller.rb:51
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+  [1m[35m (8.7ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE DATABASE `control-api_development` DEFAULT CHARACTER SET `utf8`[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE `control-api_test` DEFAULT CHARACTER SET `utf8`[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (32.5ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (20.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT GET_LOCK('1821087687418734210', 0)[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreatePayments (20190519174327)
+  [1m[35m (19.7ms)[0m  [1m[35mCREATE TABLE `payments` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519174327_create_payments.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174327')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreateClients (20190519174349)
+  [1m[35m (18.0ms)[0m  [1m[35mCREATE TABLE `clients` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `cpf` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519174349_create_clients.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174349')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (6.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreateProducts (20190519174429)
+  [1m[35m (18.3ms)[0m  [1m[35mCREATE TABLE `products` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(255), `price` float(24), `quantidity` int, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519174429_create_products.rb:3
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174429')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (3.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreateSales (20190519174521)
+  [1m[35m (27.0ms)[0m  [1m[35mCREATE TABLE `sales` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `client_id` bigint, `payment_id` bigint, `total_price` float(24), `date` datetime, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_sales_on_client_id`  (`client_id`),  INDEX `index_sales_on_payment_id`  (`payment_id`), CONSTRAINT `fk_rails_3fb137af04`
+FOREIGN KEY (`client_id`)
+  REFERENCES `clients` (`id`)
+, CONSTRAINT `fk_rails_cb0f4761c1`
+FOREIGN KEY (`payment_id`)
+  REFERENCES `payments` (`id`)
+)[0m
+  ↳ db/migrate/20190519174521_create_sales.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174521')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreateProductSales (20190519174632)
+  [1m[35m (36.4ms)[0m  [1m[35mCREATE TABLE `product_sales` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `product_id` bigint, `sale_id` bigint, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL,  INDEX `index_product_sales_on_product_id`  (`product_id`),  INDEX `index_product_sales_on_sale_id`  (`sale_id`), CONSTRAINT `fk_rails_da3be5f026`
+FOREIGN KEY (`product_id`)
+  REFERENCES `products` (`id`)
+, CONSTRAINT `fk_rails_06f643df4a`
+FOREIGN KEY (`sale_id`)
+  REFERENCES `sales` (`id`)
+)[0m
+  ↳ db/migrate/20190519174632_create_product_sales.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519174632')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+Migrating to CreateUserAdmins (20190519182736)
+  [1m[35m (20.7ms)[0m  [1m[35mCREATE TABLE `user_admins` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user` varchar(255), `password` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL)[0m
+  ↳ db/migrate/20190519182736_create_user_admins.rb:3
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20190519182736')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2019-05-20 13:05:33', '2019-05-20 13:05:33')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('1821087687418734210')[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/bin/rake:23
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:6
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO `products` (`name`, `price`, `quantidity`, `created_at`, `updated_at`) VALUES ('Açai 500ml', 8.5, 50, '2019-05-20 13:05:42', '2019-05-20 13:05:42')[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (4.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:6
+  [1m[36mProduct Create (0.2ms)[0m  [1m[32mINSERT INTO `products` (`name`, `price`, `quantidity`, `created_at`, `updated_at`) VALUES ('Agua Mineral', 2.5, 20, '2019-05-20 13:05:42', '2019-05-20 13:05:42')[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (3.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:6
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:19
+  [1m[36mClient Create (0.2ms)[0m  [1m[32mINSERT INTO `clients` (`name`, `cpf`, `created_at`, `updated_at`) VALUES ('Paulinho', '111.222.333.444-5', '2019-05-20 13:05:42', '2019-05-20 13:05:42')[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:19
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mPayment Create (0.2ms)[0m  [1m[32mINSERT INTO `payments` (`name`, `created_at`, `updated_at`) VALUES ('Débito', '2019-05-20 13:05:42', '2019-05-20 13:05:42')[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ db/seeds.rb:26
+  [1m[36mPayment Create (0.2ms)[0m  [1m[32mINSERT INTO `payments` (`name`, `created_at`, `updated_at`) VALUES ('Crédito', '2019-05-20 13:05:42', '2019-05-20 13:05:42')[0m
+  ↳ db/seeds.rb:26
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ db/seeds.rb:26
+Started GET "/" for ::1 at 2019-05-20 12:55:55 -0300
+  [1m[35m (16.8ms)[0m  [1m[35mSET NAMES utf8,  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  ↳ /home/glayton/.rvm/gems/ruby-2.3.6/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/glayton/.rvm/gems/ruby-2.3.6/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/glayton/.rvm/gems/ruby-2.3.6/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (5.9ms)
+Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/products" for ::1 at 2019-05-20 12:56:00 -0300
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (8.2ms)[0m  [1m[34mSELECT `products`.* FROM `products`[0m
+  ↳ app/controllers/products_controller.rb:8
+Completed 200 OK in 43ms (Views: 18.9ms | ActiveRecord: 11.1ms)
+
+
+Started GET "/clients" for ::1 at 2019-05-20 12:56:09 -0300
+Processing by ClientsController#index as HTML
+  [1m[36mClient Load (0.4ms)[0m  [1m[34mSELECT `clients`.* FROM `clients`[0m
+  ↳ app/controllers/clients_controller.rb:8
+Completed 200 OK in 19ms (Views: 12.9ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/payments" for ::1 at 2019-05-20 12:56:15 -0300
+Processing by PaymentsController#index as HTML
+  [1m[36mPayment Load (0.5ms)[0m  [1m[34mSELECT `payments`.* FROM `payments`[0m
+  ↳ app/controllers/payments_controller.rb:8
+Completed 200 OK in 15ms (Views: 8.9ms | ActiveRecord: 2.0ms)
+
+
