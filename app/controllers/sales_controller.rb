@@ -10,7 +10,7 @@ class SalesController < ApplicationController
 
   # GET /sales/1
   def show
-    render json: @sale
+    render json: @sale.to_json(include: :product_sales)
   end
 
   # POST /sales
@@ -22,7 +22,7 @@ class SalesController < ApplicationController
       render json: @sale, status: :created, location: @sale
 
       params[:products].each do |product|
-        @product_sale = {:product_id => product[:id], :sale_id => @sale[:id]}
+        @product_sale = {:product_id => product[:id], :sale_id => @sale[:id]} 
         ProductSale.create(@product_sale)
       end
     else
