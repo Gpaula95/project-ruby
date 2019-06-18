@@ -1,3 +1,3 @@
 class Product < ApplicationRecord
-  has_many :sale, :through => :product_sale
+  has_many :order_item
 end

@@ -1,26 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-  products = Product.create([
-    { 
-      name: 'Açai 500ml',
-      quantidity: 50,
-      price: 8.50
-    },
-    {
-      name: 'Agua Mineral',
-      quantidity: 20,
-      price: 2.5
-    }
-  ])
+Product.delete_all
+Product.create! id: 1, name: "Banana", price: 0.49, active: true
+Product.create! id: 2, name: "Maça", price: 0.29, active: true
+Product.create! id: 3, name: "Morango", price: 1.99, active: true
 
-  clients = Client.create([
-    {
-      name: 'Paulinho',
-      cpf: '111.222.333.444-5'
-    }
-  ])
-
-  payments = Payment.create([ { name: 'Débito'},{name: 'Crédito'} ])
+OrderStatus.delete_all
+OrderStatus.create! id: 1, name: "Em andamento"
+OrderStatus.create! id: 2, name: "Postado"
+OrderStatus.create! id: 3, name: "Enviado"
+OrderStatus.create! id: 4, name: "Cancelado"

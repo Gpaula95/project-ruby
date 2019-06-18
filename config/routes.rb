@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :user_admins
-  resources :products
-  resources :clients
-  resources :sales
-  resources :payments
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      resources :clients, only: [:create, :update]
+      resources :products, only: [:create, :update, :destroy]
+
+      post 'kart', to: 'kart#create'
+    end
+  end
 end
